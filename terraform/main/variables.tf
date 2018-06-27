@@ -13,3 +13,5 @@ variable "key_pair_name" {
 variable "ssh_key_name" {
   default = "virus_aquarium"
 }
+
+variable "ec2_instance_count" {}
