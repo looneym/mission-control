@@ -1,6 +1,7 @@
 cd main
 instance_ip=$(terraform output ip)
-key_file_with_path=$(terraform output key_file_with_path)
+ssh_key_name=$(terraform output ssh_key_name)
+key_file_with_path=~/.ssh/$ssh_key_name.pem
 user="ubuntu"
 
 echo connecting as $user@$instance_ip with key: $key_file_with_path 

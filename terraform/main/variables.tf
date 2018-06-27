@@ -10,6 +10,6 @@ variable "key_pair_name" {
   default = "virus-aquarium-infra"
 }
 
-
-variable "should_generate_ssh_key" {
+variable "ssh_key_name" {
+  default = "virus_aquarium"
 }
