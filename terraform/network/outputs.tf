@@ -1,5 +1,5 @@
 output "sg_ssh_id" {
-  value = "${aws_security_group.easy-ec2-allow_ssh.id}" 
+  value = "${aws_security_group.easy-ec2-allow_ssh.id}"
 }
 
 output "sg_web_id" {
@@ -7,6 +7,5 @@ output "sg_web_id" {
 }
 
 output "subnet_id" {
- value = "${aws_subnet.easy-ec2-subnet.id}"
+  value = "${aws_subnet.easy-ec2-subnet.id}"
 }
-
