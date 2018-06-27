@@ -1,4 +1,3 @@
-
 variable "shared_credentials_file" {
   default = "~/.aws/credentials"
 }
@@ -8,7 +7,7 @@ variable "region" {
 }
 
 variable "key_pair_name" {
-  default = "easy-ec2"
+  default = "virus-aquarium-infra"
 }
 
 

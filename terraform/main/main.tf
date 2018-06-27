@@ -4,6 +4,10 @@ provider "aws" {
 }
 
 
+terraform {
+  backend "s3" {}
+}
+
 module "key_pair" {
   source                = "../key-pair"
   name                  = "${var.key_pair_name}"
