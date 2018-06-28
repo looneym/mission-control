@@ -25,14 +25,27 @@
     }
   ],  
   "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt-add-repository ppa:ansible/ansible",
+        "sudo apt-get update  -y",
+        "sudo apt-get install -y ansible"
+      ]
+    },
     {   
       "type": "file",
-      "source": "files/hello.world",
-      "destination": "/tmp/hello.world"
+      "source": "files/hello_world.sh",
+      "destination": "/tmp/hello_world.sh"
     },
     {   
       "type": "shell",
       "script": "scripts/setup_virus_aquarium_web.sh"
+    },
+     {
+      "type": "ansible-local",
+      "playbook_file": "ansible-example-ruby/playbook.yml",
+      "playbook_dir": "ansible-example-ruby"
     }
   ]
 }
