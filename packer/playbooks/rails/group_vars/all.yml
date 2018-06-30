@@ -5,7 +5,7 @@ locale: en_US.UTF-8
 
 # Swap
 # Uncommend here and in /roles/common/tasks/main.yml
-swap_enabled: true
+swap_enabled: false
 swap_file_path: /swapfile
 swap_file_size_kb: 1024
 
