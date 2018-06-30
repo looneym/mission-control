@@ -14,4 +14,5 @@ variable "ssh_key_name" {
   default = "virus_aquarium"
 }
 
-variable "ec2_instance_count" {}
+variable "virus_aquarium_web_hosts_count" {}
+variable "workbench_hosts_count" {}
