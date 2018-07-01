@@ -1,8 +1,36 @@
-# Wut?
+# Rails Application Pipeline
 
-Basically this:
+A Continuous Delivery pipeline for Rails apps (WIP)
 
-![image](https://user-images.githubusercontent.com/12705417/42003129-c9e46b3e-7a61-11e8-8188-a033e2db9b3a.png)
+## Components
 
-using Packer, Ansible, Terraform and Metasploit
+### Build
+
+Uses: Packer, Ansible
+
+Creates, saves and tags a new AMI:
+
+- Installs RVM and ruby
+- Installs JS runtime 
+- Configures nginx/passenger
+- Downloads application source
+- Installs application dependancies 
+
+### Deploy
+
+uses: Terraform 
+
+Provisions a given number of EC2 hosts using the newest AMI.
+
+As well as this, provides the network infrastructure for the application to work (VPC, security groups, internet gateway etc.)
+
+Uses Terraform remote state on S3. 
+
+## Usage
+
+The `script` directory provides an entry-point for common operations
+
+## Demo
+
+`script/end_to_end.sh` provides a usage demonstration.
 
