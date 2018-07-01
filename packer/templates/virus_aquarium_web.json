@@ -25,14 +25,26 @@
     }
   ],  
   "provisioners": [
-    {   
-      "type": "file",
-      "source": "files/hello.world",
-      "destination": "/tmp/hello.world"
-    },
-    {   
+    {
       "type": "shell",
-      "script": "scripts/setup_virus_aquarium_web.sh"
-    }
+      "inline": [
+        "sudo apt-add-repository ppa:ansible/ansible",
+        "sudo apt-get update  -y",
+        "sudo apt-get install -y ansible"
+      ]
+    },
+    {
+     "type": "ansible-local",
+     "playbook_file": "playbooks/rails/playbook.yml",
+     "playbook_dir": "playbooks/rails",
+     "inventory_file": "playbooks/rails/config.yml"
+   },
+    {
+     "type": "ansible-local",
+     "playbook_file": "playbooks/rails/playbook.yml",
+     "playbook_dir": "playbooks/rails",
+     "inventory_file": "playbooks/rails/config.yml",
+     "extra_arguments": ["--tags","deploy"]
+   }
   ]
 }
