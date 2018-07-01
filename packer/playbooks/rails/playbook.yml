@@ -13,3 +13,10 @@
       }
     - nginx-passenger
     - webserver
+
+- name: deploy
+  hosts: 127.0.0.1
+  remote_user: "{{ deploy_user }}"
+  gather_facts: no
+  roles:
+    - { role: deploy, tags: ['deploy'] }

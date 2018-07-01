@@ -38,6 +38,13 @@
      "playbook_file": "playbooks/rails/playbook.yml",
      "playbook_dir": "playbooks/rails",
      "inventory_file": "playbooks/rails/config.yml"
+   },
+    {
+     "type": "ansible-local",
+     "playbook_file": "playbooks/rails/playbook.yml",
+     "playbook_dir": "playbooks/rails",
+     "inventory_file": "playbooks/rails/config.yml",
+     "extra_arguments": ["--tags","deploy"]
    }
   ]
 }
