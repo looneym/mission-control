@@ -5,6 +5,7 @@
   become: yes
   roles:
     - user
+    - nodejs
     - { role: rvm_io.ruby,
         tags: ruby,
         rvm1_rubies: ["{{ ruby_version }}"],
