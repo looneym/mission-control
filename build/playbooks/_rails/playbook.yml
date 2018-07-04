@@ -1,0 +1,22 @@
+---
+
+- name: Provision 
+  hosts: 127.0.0.1
+  become: yes
+  roles:
+    - user
+    - nodejs
+    - { role: rvm_io.ruby,
+        tags: ruby,
+        rvm1_rubies: ["{{ ruby_version }}"],
+        rvm1_user: 'ubuntu'
+      }
+    - nginx-passenger
+    - webserver
+
+- name: Deploy
+  hosts: 127.0.0.1
+  remote_user: "{{ deploy_user }}"
+  gather_facts: no
+  roles:
+    - { role: deploy, tags: ['deploy'] }

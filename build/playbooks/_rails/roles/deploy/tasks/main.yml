@@ -1,0 +1,24 @@
+- name: cloning repo
+  git:
+    repo: "{{ application_source_url }}"
+    version: "{{ gh_branch | default('master') }}"
+    dest: "{{ deploy_directory }}"
+    accept_hostkey: yes
+    force: yes
+
+- name: bundle install
+  command: bash -lc bundle install chdir={{ deploy_directory }}
+
+- name: migrate database
+  command: bash -lc bundle exec rake db:migrate RAILS_ENV="production" chdir={{ deploy_directory }}
+
+- name: tmp clear
+  command: bash -lc bundle exec rake tmp:clear chdir={{ deploy_directory }}
+
+- name: log clear
+  command: bash -lc bundle exec rake log:clear chdir={{ deploy_directory }}
+
+- name: restart app
+  file:
+    state: touch
+    path: "{{ deploy_directory }}/tmp/restart.txt"
