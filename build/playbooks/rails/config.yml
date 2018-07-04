@@ -1,0 +1,10 @@
+all:
+  vars:
+    # The following vars apply globally; additional config is in group_vars/all.
+    app_name: my-app            # name of application
+    deploy_user: ubuntu          # name of the remote user account for provisioning and deployment
+    ruby_version: ruby-2.4.3    # version of Ruby
+    webserver_name: demo.example.com  # Virtual server name for Nginx config 
+    deploy_directory: "/home/{{ deploy_user }}/apps/{{ app_name }}"
+    phusion_ruby_path: "/home/{{ deploy_user }}/.rvm/wrappers/{{ruby_version}}/ruby" 
+    application_source_url: "https://github.com/looneym/sample_rails.git"
