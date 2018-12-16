@@ -4,3 +4,4 @@ terraform.tfvars
 *.tfstate*
 terraform.tfstate
 terraform.tfstate.backup
+ansible_inventory.cfg
