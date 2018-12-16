@@ -3,7 +3,7 @@
 set -e
 
 export AWS_PROFILE=virus-aquarium-infra
-cd deploy/main
+cd infra/main
 
 terraform apply
 

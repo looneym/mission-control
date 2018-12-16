@@ -3,7 +3,7 @@
 set -e
 
 export AWS_PROFILE=virus-aquarium-infra
-cd build
+cd ami
 
 packer build \
   templates/virus_aquarium_web.json
