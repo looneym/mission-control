@@ -15,4 +15,3 @@ variable "ssh_key_name" {
 }
 
 variable "virus_aquarium_web_hosts_count" {}
-variable "workbench_hosts_count" {}

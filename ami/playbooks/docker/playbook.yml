@@ -1,0 +1,9 @@
+---
+
+- name: Provision 
+  hosts: 127.0.0.1
+  become: yes
+  roles:
+    - user
+    - nickjj.docker
+
