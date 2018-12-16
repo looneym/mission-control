@@ -29,3 +29,22 @@ module "virus_aquarium_web_hosts" {
 module "network" {
   source = "../network"
 }
+
+data "template_file" "ansible_inventory_template" {
+  template = "${file(pathexpand("~/src/aqua/deploy/templates/hosts.cfg"))}"
+  depends_on = [
+    "module.virus_aquarium_web_hosts",
+  ]
+  vars {
+   hosts = "${join("\n", module.virus_aquarium_web_hosts.instance_public_ips)}"
+  }
+}
+
+resource "null_resource" "ansible_inventory" {
+  triggers {
+    template_rendered = "${data.template_file.ansible_inventory_template.rendered}"
+  }
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.ansible_inventory_template.rendered}' > ansible_inventory"
+  }
+}
