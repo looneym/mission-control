@@ -24,6 +24,7 @@ module "virus_aquarium_web_hosts" {
   subnet_id              = "${module.network.subnet_id}"
   vpc_security_group_ids = ["${module.network.sg_ssh_id}", "${module.network.sg_web_id}"]
   key_name               = "${var.ssh_key_name}"
+  instance_type          = "t2.small"
 }
 
 module "network" {

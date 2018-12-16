@@ -9,3 +9,4 @@ all:
     phusion_ruby_path: "/home/{{ deploy_user }}/.rvm/wrappers/{{ruby_version}}/ruby" 
     application_source_url: "https://github.com/looneym/cnc.git"
     ansible_ssh_private_key_file: "~/.ssh/virus_aquarium.pem"
+    gh_branch: "nuke"
