@@ -32,7 +32,7 @@ module "network" {
 }
 
 data "template_file" "ansible_inventory_template" {
-  template = "${file(pathexpand("~/src/aqua/deploy/templates/hosts.cfg"))}"
+  template = "${file("${path.module}/templates/ansible_inventory")}"
   depends_on = [
     "module.virus_aquarium_web_hosts",
   ]
@@ -46,6 +46,6 @@ resource "null_resource" "ansible_inventory" {
     template_rendered = "${data.template_file.ansible_inventory_template.rendered}"
   }
   provisioner "local-exec" {
-    command = "echo '${data.template_file.ansible_inventory_template.rendered}' > ansible_inventory"
+    command = "echo '${data.template_file.ansible_inventory_template.rendered}' > ansible_inventory.cfg"
   }
 }
