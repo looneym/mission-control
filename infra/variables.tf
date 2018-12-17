@@ -14,5 +14,5 @@ variable "ssh_key_name" {
   default = "virus_aquarium"
 }
 
-variable "web_01_hosts_count" {}
-variable "web_02_hosts_count" {}
+variable "cnc_hosts_count" {}
+variable "prey_hosts_count" {}
