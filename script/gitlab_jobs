@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+
+import gitlab
+import os
+from optparse import OptionParser
+
+parser = OptionParser()
+parser.add_option("-s", "--sha", dest="sha",
+                  help="Specify SHA of the commit to target", metavar="SHA")
+parser.add_option("-p", "--project", dest="project",
+                  help="Specify name of the project target", metavar="PROJECT")
+(options, args) = parser.parse_args()
+
+GITLAB_TOKEN = os.environ["GITLAB_API_TOKEN"]
+GITLAB_URL = "https://www.gitlab.com" 
+project_name = options.project
+commit_sha = options.sha
+deploy_jobs = ["build_app_image","build_web_image"]
+
+gl = gitlab.Gitlab(
+    GITLAB_URL,
+    private_token=GITLAB_TOKEN,
+)
+gl.auth()
+current_user = gl.user
+
+project_path = "{}/{}".format(current_user.name, project_name)
+project = gl.projects.get(project_path)
+commit = project.commits.get(commit_sha)   
+statuses = commit.statuses.list()
+
+job_states = list(map(lambda status: status.status == "success" and status.name in deploy_jobs, statuses))
+
+print(all(job_states))
