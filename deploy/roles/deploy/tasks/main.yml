@@ -6,6 +6,12 @@
     accept_hostkey: yes
     force: yes
 
+- name: Register the SHA of the current commit
+  shell: git log -1 --format=%h
+  args:
+    chdir: "{{ deploy_directory }}"
+  register: git_log_output
+
 - name: stop the service
   docker_service:
     project_src: "{{ deploy_directory }}"
@@ -16,3 +22,5 @@
     project_src: "{{ deploy_directory }}"
     build: true
     state: present
+  environment:
+    TAG: "{{ git_log_output.stdout }}"
