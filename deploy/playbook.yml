@@ -3,5 +3,8 @@
 - hosts: all
   remote_user: "{{ deploy_user }}"
   gather_facts: no
+  become: yes
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python-docker"
   roles:
     - { role: deploy, tags: ['deploy'] }

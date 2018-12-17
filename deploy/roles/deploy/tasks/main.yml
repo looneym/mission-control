@@ -6,3 +6,7 @@
     accept_hostkey: yes
     force: yes
 
+- name: run the service defined in docker-compose.yml in the deploy_directory
+  docker_service:
+    project_src: "{{ deploy_directory }}"
+    build: true
