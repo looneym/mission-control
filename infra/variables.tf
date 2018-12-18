@@ -6,12 +6,8 @@ variable "region" {
   default = "us-east-1"
 }
 
-variable "key_pair_name" {
-  default = "virus-aquarium-infra"
-}
-
 variable "ssh_key_name" {
-  default = "virus_aquarium"
+  default = "mission-control"
 }
 
 variable "cnc_hosts_count" {}

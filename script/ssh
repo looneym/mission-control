@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+ssh $1 -l ubuntu -i ~/.ssh/mission-control.pem
+

@@ -18,7 +18,7 @@ data "aws_ami" "docker" {
 }
 
 module "network" {
-  source = "../network"
+  source = "./network"
 }
 
 module "cnc" {
