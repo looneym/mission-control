@@ -1,0 +1,13 @@
+- name: Register the SHA of the current commit
+  shell: cat REVISION
+  args:
+    chdir: "/apps/mc-demo/current"
+  register: revision_output
+
+- name: build and run the service defined in docker-compose.yml in the deploy_directory
+  docker_service:
+    project_src: "/apps/mc-demo/current"
+    build: true
+    state: present
+  environment:
+    TAG: "{{ revision_output.stdout }}"
