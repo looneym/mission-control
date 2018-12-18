@@ -1,6 +1,6 @@
 ---
 
-- hosts: "{{ hosts }}"
+- hosts: "{{ target }}"
   remote_user: "{{ deploy_user }}"
   gather_facts: no
   become: yes
