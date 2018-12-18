@@ -11,24 +11,28 @@ parser.add_option("-p", "--project", dest="project",
                   help="Specify name of the project target", metavar="PROJECT")
 (options, args) = parser.parse_args()
 
-GITLAB_TOKEN = os.environ["GITLAB_API_TOKEN"]
-GITLAB_URL = "https://www.gitlab.com" 
-project_name = options.project
-commit_sha = options.sha
-deploy_jobs = ["build_app_image","build_web_image"]
 
-gl = gitlab.Gitlab(
-    GITLAB_URL,
-    private_token=GITLAB_TOKEN,
-)
-gl.auth()
-current_user = gl.user
+def jobs_did_complete_succesfully(project_name, commit_sha):
+    GITLAB_TOKEN = os.environ["GITLAB_API_TOKEN"]
+    GITLAB_URL = "https://www.gitlab.com" 
+    deploy_jobs = ["build_app_image", "build_web_image"]
 
-project_path = "{}/{}".format(current_user.name, project_name)
-project = gl.projects.get(project_path)
-commit = project.commits.get(commit_sha)   
-statuses = commit.statuses.list()
+    gl = gitlab.Gitlab(
+        GITLAB_URL,
+        private_token=GITLAB_TOKEN,
+    )
+    gl.auth()
+    current_user = gl.user
 
-job_states = list(map(lambda status: status.status == "success" and status.name in deploy_jobs, statuses))
+    project_path = "{}/{}".format(current_user.name, project_name)
+    project = gl.projects.get(project_path)
+    commit = project.commits.get(commit_sha)   
+    statuses = commit.statuses.list()
 
-print(all(job_states))
+    job_states = list(map(lambda status: status.status == "success" and status.name in deploy_jobs, statuses))
+
+    return all(job_states)
+
+
+if __name__ == "__main__":
+    print(jobs_did_complete_succesfully(options.project, options.sha))
