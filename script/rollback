@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+
+from optparse import OptionParser
+import subprocess
+
+parser = OptionParser()
+parser.add_option("-a", "--app", dest="app",
+                  help="The name of the app to rollback", metavar="APP")
+parser.add_option("-t", "--target", dest="target",
+                  help="The hosts to rollback", metavar="TARGET")
+parser.add_option("-i", "--infra", dest="infra",
+                  help="The infra where the hosts have been provisioned. \
+                  Inferred from APP if not provided",
+                  metavar="INFRA")
+(options, args) = parser.parse_args()
+
+if options.infra is None:
+    options.infra = "{}-infra".format(options.app)
+
+deploy_command = "\
+ansible-playbook \
+--inventory-file=~/infra/{}/ansible_inventory.cfg \
+--inventory-file=~/mission-control/deploy/config.yml \
+~/mission-control/deploy/rollback.yml \
+--extra-vars \"target={} app_name={}\"" \
+.format(options.infra, options.target, options.app)
+
+print(deploy_command)
+subprocess.run(deploy_command, shell=True)

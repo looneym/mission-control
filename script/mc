@@ -10,6 +10,7 @@ Usage:
 Available Commands:
   ami           build a new AMI
   deploy        deploy code to production
+  rollback      roll back a deployment
   ssh           ssh to a machine
 
 EOF
@@ -27,6 +28,11 @@ function deploy {
   $DIR/deploy "$@"
 }
 
+function rollback {
+  shift 1
+  $DIR/rollback "$@"
+}
+
 function ssh {
   shift 1
   $DIR/ssh "$@"
@@ -39,6 +45,9 @@ case $1 in
     ;;
   deploy)
     deploy "$@"
+    ;;
+  rollback)
+    rollback "$@"
     ;;
   ssh)
     ssh "$@"

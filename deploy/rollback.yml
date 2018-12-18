@@ -1,0 +1,16 @@
+---
+
+- hosts: "{{ target }}"
+  remote_user: "{{ deploy_user }}"
+  gather_facts: no
+  become: yes
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python-docker"
+  roles:
+    - { role: ansistrano.rollback,
+        ansistrano_deploy_via: "git",
+        ansistrano_deploy_to: "/apps/{{ app_name }}",
+        ansistrano_allow_anonymous_stats: no,
+        ansistrano_rollback_before_symlink_tasks_file: "./ansistrano-tasks/before-symlink.yml",
+        ansistrano_rollback_after_symlink_tasks_file: "./ansistrano-tasks/after-symlink.yml",
+      }
