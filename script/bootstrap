@@ -4,3 +4,12 @@ pip install --upgrade virtualenv
 virtualenv -p python3 venv
 source venv/bin/activate
 pip install -r requirements.txt
+
+echo
+echo "======================================"
+echo
+echo "Bootstrap process completed! 🎉"
+echo "Run this to activate the virtualenv:"
+echo
+echo "source venv/bin/activate"
+echo
