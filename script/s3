@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-DIR=`dirname $0`
-source $DIR/env
-
-aws s3 ls
