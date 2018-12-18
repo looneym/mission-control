@@ -15,63 +15,6 @@ Mission Control is a set of integrated tools for tasks like:
 - Automated rolling deploys
 - Server functionality
 
-### Installation
-
-clone the repo into your home directory and add the following to your path:
-
-`export PATH=$PATH:~/mission-control/script`
-
-This will add the `mc` executable to your path:
-
-```
-$ mc --help
-
-Mission Control : infrastructure management and deployment tool
-
-Usage:
-  mc [command]
-Available Commands:
-  ami           build a new AMI
-  deploy        deploy code to production
-  ssh           ssh to a machine
-```
-
-### Requirements
-
-
-#### Dependancies 
-
-- Ansible
-- Terraform 
-- Packer
-
-#### Directory Structure 
-
-Mission Control ties together your applications source code and the infrastructure needed to run it. 
-For this reason it depends on a specific directory structure:
-
-
-```
-── $HOME
-   ├── infra
-   │   └── my_app
-   └── src
-       └── my_app
-```
-
-#### AWS credentials
-
-You will need to add a profile to ~/.aws/credentials
-
-```
-[mission-control]
-aws_access_key_id=<>
-aws_secret_access_key=<>
-```
-
-You will also need to create an SSH key pair on AWS called mission-control and place it in `~/.ssh/mission-control.pem`
-
-
 ### Usage example
 
 A demo application and infrastructure repo are provided.
@@ -130,5 +73,61 @@ You may also use Mission Control to ssh to the host:
 ```
 mc ssh $ip
 ```
+
+### Installation
+
+clone the repo into your home directory and add the following to your path:
+
+`export PATH=$PATH:~/mission-control/script`
+
+This will add the `mc` executable to your path:
+
+```
+$ mc --help
+
+Mission Control : infrastructure management and deployment tool
+
+Usage:
+  mc [command]
+Available Commands:
+  ami           build a new AMI
+  deploy        deploy code to production
+  ssh           ssh to a machine
+```
+
+### Requirements
+
+
+#### Dependancies 
+
+- Ansible
+- Terraform 
+- Packer
+
+#### Directory Structure 
+
+Mission Control ties together your applications source code and the infrastructure needed to run it. 
+For this reason it depends on a specific directory structure:
+
+
+```
+── $HOME
+   ├── infra
+   │   └── my_app
+   └── src
+       └── my_app
+```
+
+#### AWS credentials
+
+You will need to add a profile to ~/.aws/credentials
+
+```
+[mission-control]
+aws_access_key_id=<>
+aws_secret_access_key=<>
+```
+
+You will also need to create an SSH key pair on AWS called mission-control and place it in `~/.ssh/mission-control.pem`
 
 
