@@ -8,16 +8,24 @@ parser.add_option("-a", "--app", dest="app",
                   help="The name of the app to deploy", metavar="APP")
 parser.add_option("-t", "--target", dest="target",
                   help="The hosts on which to deploy", metavar="TARGET")
+parser.add_option("-i", "--infra", dest="infra",
+                  help="The infra where the hosts have been provisioned. \
+                  Inferred from APP if not provided",
+                  metavar="INFRA")
 parser.add_option("-g", "--git_host", dest="git_host",
                   help="Where the git repo is hosted", metavar="GIT_HOST")
 (options, args) = parser.parse_args()
 
+if options.infra is None:
+    options.infra = "{}-infra".format(options.app)
+
 deploy_command = "\
 ansible-playbook \
 --inventory-file=~/infra/{}/ansible_inventory.cfg \
---inventory-file=deploy/config.yml deploy/playbook.yml \
+--inventory-file=~/mission-control/deploy/config.yml \
+~/mission-control/deploy/playbook.yml \
 --extra-vars \"target={} git_host={} app_name={}\"" \
-.format(options.app, options.target, options.git_host, options.app)
+.format(options.infra, options.target, options.git_host, options.app)
 
 print(deploy_command)
 subprocess.run(deploy_command, shell=True)
