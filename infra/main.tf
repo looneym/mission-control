@@ -18,11 +18,11 @@ data "aws_ami" "docker" {
 }
 
 module "network" {
-  source = "./network"
+  source = "./common/network"
 }
 
 module "cnc" {
-  source                 = "./ec2"
+  source                 = "./modules/ec2"
   ami                    = "${data.aws_ami.docker.id}"
   count                  = "${var.cnc_hosts_count}"
   subnet_id              = "${module.network.subnet_id}"
@@ -32,7 +32,7 @@ module "cnc" {
 }
 
 module "prey" {
-  source                 = "./ec2"
+  source                 = "./modules/ec2"
   ami                    = "${data.aws_ami.docker.id}"
   count                  = "${var.prey_hosts_count}"
   subnet_id              = "${module.network.subnet_id}"
