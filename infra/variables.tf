@@ -11,4 +11,3 @@ variable "ssh_key_name" {
 }
 
 variable "cnc_hosts_count" {}
-variable "prey_hosts_count" {}
