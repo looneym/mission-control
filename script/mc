@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+function usage {
+cat << EOF
+
+Mission Control : infrastructure management and deployment tool
+
+Usage:
+  mc [command]
+Available Commands:
+  ami           build a new AMI
+  deploy        deploy code to production
+  ssh           ssh to a machine
+
+EOF
+}
+
+DIR=~/mission-control/script
+
+function ami {
+  shift 1
+  $DIR/ami "$@"
+}
+
+function deploy {
+  shift 1
+  $DIR/deploy "$@"
+}
+
+function ssh {
+  shift 1
+  $DIR/ssh "$@"
+}
+
+
+case $1 in
+  ami)
+    ami "$@"
+    ;;
+  deploy)
+    deploy "$@"
+    ;;
+  ssh)
+    ssh "$@"
+    ;;
+    
+  *)
+    usage
+    ;;
+esac

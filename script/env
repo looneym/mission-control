@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
 export AWS_PROFILE=mission-control
+export PATH=$PATH:~/mission-control/script
