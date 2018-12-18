@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from optparse import OptionParser
+import subprocess
 
 parser = OptionParser()
 parser.add_option("-a", "--app", dest="app",
@@ -19,3 +20,4 @@ ansible-playbook \
 .format(options.app, options.target, options.git_host, options.app)
 
 print(deploy_command)
+subprocess.run(deploy_command, shell=True)
