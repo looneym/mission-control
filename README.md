@@ -108,7 +108,7 @@ an ansible inventory file with the IPs of the machines.
 
 Deploy:
 ```
-mc deploy --app mc-demo-app -target mc-demo_hosts -git_host github
+mc deploy --app mc-demo-app -target emo_hosts -git_host github
 
 ```
 
