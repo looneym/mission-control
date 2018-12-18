@@ -23,7 +23,7 @@ deploy_command = "\
 ansible-playbook \
 --inventory-file=~/infra/{}/ansible_inventory.cfg \
 --inventory-file=~/mission-control/deploy/config.yml \
-~/mission-control/deploy/playbook.yml \
+~/mission-control/deploy/deploy.yml \
 --extra-vars \"target={} git_host={} app_name={}\"" \
 .format(options.infra, options.target, options.git_host, options.app)
 
