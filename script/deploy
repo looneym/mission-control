@@ -12,20 +12,40 @@ parser.add_option("-i", "--infra", dest="infra",
                   help="The infra where the hosts have been provisioned. \
                   Inferred from APP if not provided",
                   metavar="INFRA")
-parser.add_option("-g", "--git_host", dest="git_host",
-                  help="Where the git repo is hosted", metavar="GIT_HOST")
+parser.add_option("-e", "--env", dest="env_file",
+                  help="An INI file containing environment variables \
+                  to set on the host",
+                  metavar="FILE")
 (options, args) = parser.parse_args()
 
 if options.infra is None:
     options.infra = "{}-infra".format(options.app)
+
+if options.env_file:
+    f = options.env_file
+    env_vars_from_file = {}
+    lines = [line.rstrip('\n').split("=") for line in open(f)]
+    for line in lines:
+        if len(line) < 2:
+            continue 
+        key = line[0]
+        value = line[1]
+        env_vars_from_file[key] = value
+
+cli_extra_vars = {
+    "target": options.target,
+    "app_name": options.app,
+}
+combined_extra_vars = {**cli_extra_vars, **env_vars_from_file}
+extra_vars_string = ' '.join("{}={}".format(key, val) for (key, val) in combined_extra_vars.items())
 
 deploy_command = "\
 ansible-playbook \
 --inventory-file=~/infra/{}/ansible_inventory.cfg \
 --inventory-file=~/mission-control/deploy/config.yml \
 ~/mission-control/deploy/deploy.yml \
---extra-vars \"target={} git_host={} app_name={}\"" \
-.format(options.infra, options.target, options.git_host, options.app)
+--extra-vars \"{}\"" \
+.format(options.infra, extra_vars_string)
 
 print(deploy_command)
 subprocess.run(deploy_command, shell=True)

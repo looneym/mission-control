@@ -4,5 +4,6 @@ all:
     app_name: "{{ app_name }}"            # name of application
     deploy_user: ubuntu          # name of the remote user account for provisioning and deployment
     deploy_directory: "/home/{{ deploy_user }}/apps/{{ app_name }}"
-    application_source_url: "https://{{ git_host }}.com/looneym/{{ app_name }}.git"
+    application_source_url: "https://github.com/looneym/{{ app_name }}.git"
     ansible_ssh_private_key_file: "~/.ssh/mission-control.pem"
+    production_compose_file: "production-compose.yml"

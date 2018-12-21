@@ -7,11 +7,11 @@
   vars:
     ansible_python_interpreter: "/usr/bin/env python-docker"
   roles:
-    - { role: ansistrano.deploy,
-        ansistrano_deploy_via: "git",
-        ansistrano_git_repo: "https://{{ git_host }}.com/looneym/{{ app_name }}.git",
-        ansistrano_deploy_to: "/apps/{{ app_name }}",
-        ansistrano_allow_anonymous_stats: no,
-        ansistrano_before_symlink_tasks_file: "./ansistrano-tasks/before-symlink.yml",
-        ansistrano_after_symlink_tasks_file: "./ansistrano-tasks/after-symlink.yml",
-      }
+    - role: ansible-dotenv-generator
+      dotenv_sample: /apps/railsgoat/current/.env.sample
+      env:
+        VAR_1: hello
+        VAR_2: world
+      dest: /apps/railsgoat/current/.env
+    - restart-service
+      
